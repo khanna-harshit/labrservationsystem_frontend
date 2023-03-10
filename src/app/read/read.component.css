@@ -1,0 +1,23 @@
+.navbar-color {
+  /* overflow: hidden; */
+  background-color: #333;
+  /* top: 0; Position the navbar at the top of the page */
+  position: sticky;
+  width: 100%; 
+}
+
+  /* .hello{
+    /* margin-top:30px; */
+    /* overflow: auto;
+    position: fixed;
+    background-color: rgb(224, 227, 227);
+    max-height: 100vh; */
+
+
+  
+  /* } */ 
+  a:hover{
+    cursor: pointer;
+  }
+  
+  

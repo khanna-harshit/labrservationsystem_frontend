@@ -1,0 +1,23 @@
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; 
+     /* Full width */
+  }
+  
+  .hello{
+    margin-top:30px;
+    overflow: auto;
+    position:fixed;
+    max-height: 100vh;
+    background-color: rgb(224, 227, 227);
+
+  
+  
+  }
+  a:hover{
+    cursor: pointer;
+  }
+  

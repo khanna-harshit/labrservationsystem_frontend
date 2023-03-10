@@ -1,0 +1,132 @@
+
+ 
+      <nav class="navbar navbar-color navbar-expand-lg bg-body-tertiary  bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand"  (click)="clickedHead()" >Lab Reservation Tool</a>
+          <button class="navbar-toggler" type="button"  data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <button class="btn btn-outline-success me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Projects</button>
+
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a *ngIf="access==='admin'" class="nav-link active"   aria-current="page" (click)="adduser()">Add User</a>
+            </li>
+            <li class="nav-item">
+              <a *ngIf="access==='admin'" class="nav-link active"  aria-current="page" (click)="adddevice()">Add Device</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" (click)="clickedUser()">User Info</a>
+            </li>
+            
+            
+          </ul>
+          <button class="btn btn-outline-success me-2" type="submit" (click)="clickedCart()">Your topologies</button>
+          <button class="btn btn-outline-success me-2" *ngIf="access==='admin' " type="submit" (click)="clickedTopology()"> Create Topology</button>
+
+
+          <button class="btn btn-outline-danger me-2" type="submit" routerLink="/logout">Logout</button>
+
+        </div>
+       
+      </div>
+  </nav>
+  <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+    <div class="offcanvas-header">
+      <h2 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Projects</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+              <nav class="nav nav-pills " *ngFor="let project of projects">
+                <a class="nav-link ms-3 my-1"  style="color:black;" (click)="getProjectInfo(project.projectname, project.id)">{{project.projectname}}</a>
+              </nav>
+            
+            <button class="btn btn-primary m-3" *ngIf="access==='admin'"    (click)="clickedRegisteredProject()">Register Project</button>   </div>
+  </div>
+    
+
+
+
+  
+
+  
+
+
+      <div class=" container mt-5">
+<div class="container hello " style="background-color: white;">
+  <h1 style="text-align: center;" class="mt-5 ">UPLOAD EXCEL FILE</h1>
+  <div *ngIf="errMsg" class="alert alert-danger alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{errMsg}}</strong>
+    <button type="button" class="btn-close " data-bs-dismiss="alert" aria-label="Close" (click)="clickClose()"></button>
+  </div>
+  <div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{successMsg}}</strong>
+    <button type="button" class="btn-close " data-bs-dismiss="alert" aria-label="Close" (click)="clickClose()"></button>
+  </div>
+  <input type="file" class="mt-5 " accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" (change)="changeFile($event)">
+  <button class="btn btn-primary " (click)="uploadFile()">Upload File</button>
+  <div *ngIf='spiner===true' class="ms-4 mt-2 spinner-border" role="status">
+    <!-- <span *ngIf='spiner===true'class="ms-4 mt-2visually-hidden">Loading...</span> -->
+  </div>
+  
+   <h1 style="text-align: center;" class="m-5">ADD USER</h1>
+   <div *ngIf="erMsg" class="alert alert-danger alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{erMsg}}</strong>
+    <button type="button" class="btn-close " data-bs-dismiss="alert" aria-label="Close" (click)="clickClose()"></button>
+  </div>
+  <div *ngIf="sucMsg" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{sucMsg}}</strong>
+    <button type="button" class="btn-close " data-bs-dismiss="alert" aria-label="Close" (click)="clickClose()"></button>
+  </div>
+
+    <div class="row">
+         <!-- show error message -->
+   
+    <form [formGroup]="userForm"  >
+        <div class="col-md-4 m-2">
+            <input type="'text" class="form-control" placeholder="Enter full Name" formControlName="fullname">
+        </div>
+        <div class="col-md-4 m-2">
+            <input type="'text" class="form-control" placeholder="Enter Password" formControlName="password">
+        </div>
+        <div class="col-md-4 m-2">
+
+            <label for="team">Team</label>
+            <select id="team" formControlName="teamname">
+              <option value="System test">System test</option>
+              <option value="Platform test">Platform test</option>
+              
+            </select>
+          </div>
+          <div class="col-md-4 m-2">
+
+            <label for="accesslevel">Access Level</label>
+            <select  id="accesslevel" formControlName="accesslevel">
+              <option value="user">user</option>
+              <option value="guest">guest</option>
+
+              <option value="admin">admin</option>
+              
+            </select>
+              </div>
+
+        <div class="col-md-4 m-2" *ngIf="getparamid">
+
+        <button type="submit" class="btn btn-primary m-2" (click)="userSubmit()">Add User</button>
+    </div>
+   
+    </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,181 @@
+
+ 
+      <nav class="navbar navbar-color navbar-expand-lg bg-body-tertiary  bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand"  (click)="clickedHead()" >Lab Reservation Tool</a>
+          <button class="navbar-toggler" type="button"  data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <button class="btn btn-outline-success me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Projects</button>
+
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a *ngIf="access==='admin'" class="nav-link active"   aria-current="page" (click)="adduser()">Add User</a>
+            </li>
+            <li class="nav-item">
+              <a *ngIf="access==='admin'" class="nav-link active"  aria-current="page" (click)="adddevice()">Add Device</a>
+            </li>
+            <li class="nav-item">
+              <a *ngIf="access==='admin' || access==='user'" class="nav-link active" aria-current="page" (click)="clickedUser()">User Info</a>
+            </li>
+            
+            
+          </ul>
+          <button class="btn btn-outline-success me-2" type="submit" (click)="clickedCart()" *ngIf="access==='admin' && 'user'">Your topologies</button>
+          <button class="btn btn-outline-success me-2" *ngIf="access==='admin' " type="submit" (click)="clickedTopology()"> Create Topology</button>
+
+
+          <button class="btn btn-outline-danger me-2" type="submit" routerLink="/logout">Logout</button>
+
+        </div>
+       
+      </div>
+  </nav>
+  <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+    <div class="offcanvas-header">
+      <h2 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Projects</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <nav id="navbar-example3" class="  ">
+        
+          <!-- <h6 *ngIf="access==='admin' || access==='user'" class="" >Devices</h6>
+          <nav class="nav nav-pills ">
+            <a *ngIf="access==='admin' || access==='user'" class="nav-link  ms-3 my-1" style="color:black;"(click)="read()">All Devices</a>
+          </nav>
+
+            <nav class="nav nav-pills ">
+
+            <a *ngIf="access==='admin' || access==='user'" class="nav-link  ms-3 my-1"style="color:black;"(click)="reserve()">Reserved Devices</a>
+          </nav>
+
+            <nav class="nav nav-pills ">
+
+            <a *ngIf="access==='admin' || access==='user'" class="nav-link  ms-3 my-1" style="color:black;"(click)="unreserve()">Unreserved Devices</a>
+          </nav>
+           -->
+          <!-- <h6 class=" mt-3" >Projects</h6> -->
+          
+          <nav class="nav nav-pills " *ngFor="let project of projects">
+            <a class="nav-link ms-3 my-1"  style="color:black;" (click)="getProjectInfo(project.projectname, project.id)">{{project.projectname}}</a>
+          </nav>
+          <button class="btn btn-primary m-3"  *ngIf="access==='admin'"   (click)="clickedRegisteredProject()">Register Project</button>
+
+        </nav>    </div>
+  </div>
+    
+      <div class="container mt-5">
+
+        <h1 style="text-align: center; " class="m-5"> {{getparamname}} Devices</h1>
+        
+  <table class="table table-bordered" *ngIf="access==='user' || access==='admin'">
+    <thead>
+      <tr>
+       
+        <th style="text-align: center;" scope="col">Rack</th>
+        <th style="text-align: center;" scope="col">Unit</th>
+        <th style="text-align: center;" scope="col">Device Name</th>
+        <th style="text-align: center;" scope="col">Console IP</th>
+        <th style="text-align: center;" scope="col">Management IP</th>
+        <th style="text-align: center;" scope="col">Power Cycler IP</th>
+        <th style="text-align: center;" scope="col">Power Cycler Port</th>
+        <th style="text-align: center;" scope="col">Team Name</th>
+        <th style="text-align: center;" scope="col">Project Name</th>
+        <th style="text-align: center;" scope="col" *ngIf="access==='admin' || access==='user'">Status</th>
+        <th style="text-align: center;" scope="col" *ngIf="access==='admin' || access==='user'">Action</th>
+      </tr>
+    </thead>
+    <tbody> 
+      <tr *ngFor="let item of devices">
+        <td *ngIf="item.projectname === getparamname">{{item.rack}}</td>
+        <td *ngIf="item.projectname === getparamname">{{item.unit}}</td>
+        <td *ngIf="item.projectname === getparamname">{{item.devicename}}</td>
+        <td *ngIf="item.projectname === getparamname">{{item.consoleip}}</td>
+        <td *ngIf="item.projectname === getparamname">{{item.managementip}}</td>
+        <td *ngIf="item.projectname === getparamname">{{item.powercycleip}}</td>
+        <td *ngIf="item.projectname === getparamname">{{item.powercycleport}}</td>
+        <td *ngIf="item.projectname === getparamname">{{item.teamname}}</td>
+        <td *ngIf="item.projectname === getparamname">{{item.projectname}}</td>
+        <td style="text-align: center;" *ngIf="currentStatusArr.includes(item.id) && item.projectname === getparamname && !devicesInTopology.includes(item.id) && (access==='admin' || access==='user') "><button class=" btn btn-danger" >Reserved</button></td>
+        <td  style="text-align: center;" *ngIf="!currentStatusArr.includes(item.id)  && item.projectname === getparamname && !devicesInTopology.includes(item.id) && (access==='admin' || access==='user') "><button class=" btn btn-primary">Unreserved</button></td>
+        <td  style="text-align: center;" *ngIf="currentStatusArr.includes(item.id) && item.projectname === getparamname && devicesInTopology.includes(item.id)">--</td>
+        <td  style="text-align: center;" *ngIf="!currentStatusArr.includes(item.id)  && item.projectname === getparamname && devicesInTopology.includes(item.id)">--</td>
+  
+  
+        <td style="text-align: center;"  *ngIf=" item.projectname === getparamname && (access==='admin' || access==='user') && !devicesInTopology.includes(item.id)"><button class="btn btn-warning"  (click)="clickedunreserved(item.id)">More</button></td>
+        <td  style="text-align: center;"*ngIf=" item.projectname === getparamname && (access==='admin' || access==='user') && devicesInTopology.includes(item.id)">--</td>
+
+        <!-- <td *ngIf="item.status==='Reserved' && item.projectname === getparamname && (access==='admin' || access==='user') "><button class="btn btn-success"  (click)="clickedreserved(item.id)">{{item.status}}</button></td> -->
+  
+  
+  
+  
+        <!-- <td><button class="btn btn-danger" (click)="deleteId(item.id)">Delete</button></td>
+        <td><a [routerLink]="['/create', item.id]" class="btn btn-primary" >Update</a></td> -->
+  
+        
+      </tr>
+      
+     </tbody> 
+  </table>
+  <table class="table table-bordered" *ngIf="access==='guest' ">
+    <thead>
+      <tr>
+       
+        <th style="text-align: center;" scope="col">Rack</th>
+        <th style="text-align: center;" scope="col">Unit</th>
+        <th style="text-align: center;" scope="col">Device Name</th>
+        <th style="text-align: center;" scope="col">Console IP</th>
+        <th style="text-align: center;" scope="col">Management IP</th>
+        <th style="text-align: center;" scope="col">Power Cycler IP</th>
+        <th style="text-align: center;" scope="col">Power Cycler Port</th>
+        <th style="text-align: center;" scope="col">Team Name</th>
+        <th style="text-align: center;" scope="col">Project Name</th>
+        <th style="text-align: center;" scope="col" *ngIf="access==='admin' || access==='user'">Status</th>
+        <th style="text-align: center;" scope="col" *ngIf="access==='admin' || access==='user'">Action</th>
+      </tr>
+    </thead>
+    <tbody> 
+      <tr *ngFor="let item of devices">
+        <td *ngIf="item.projectname === getparamname">{{item.rack}}</td>
+        <td *ngIf="item.projectname === getparamname">{{item.unit}}</td>
+        <td *ngIf="item.projectname === getparamname">{{item.devicename}}</td>
+        <td *ngIf="item.projectname === getparamname">{{item.consoleip}}</td>
+        <td *ngIf="item.projectname === getparamname">{{item.managementip}}</td>
+        <td *ngIf="item.projectname === getparamname">{{item.powercycleip}}</td>
+        <td *ngIf="item.projectname === getparamname">{{item.powercycleport}}</td>
+        <td *ngIf="item.projectname === getparamname">{{item.teamname}}</td>
+        <td *ngIf="item.projectname === getparamname">{{item.projectname}}</td>
+        <td style="text-align: center;" *ngIf="currentStatusArr.includes(item.id) && item.projectname === getparamname && !devicesInTopology.includes(item.id) && (access==='admin' || access==='user') "><button class=" btn btn-danger" >Reserved</button></td>
+        <td  style="text-align: center;" *ngIf="!currentStatusArr.includes(item.id)  && item.projectname === getparamname && !devicesInTopology.includes(item.id) && (access==='admin' || access==='user') "><button class=" btn btn-primary">Unreserved</button></td>
+        <td  style="text-align: center;" *ngIf="currentStatusArr.includes(item.id) && item.projectname === getparamname && devicesInTopology.includes(item.id)">--</td>
+        <td  style="text-align: center;" *ngIf="!currentStatusArr.includes(item.id)  && item.projectname === getparamname && devicesInTopology.includes(item.id)">--</td>
+  
+  
+        <td style="text-align: center;"  *ngIf=" item.projectname === getparamname && (access==='admin' || access==='user') && !devicesInTopology.includes(item.id)"><button class="btn btn-warning"  (click)="clickedunreserved(item.id)">More</button></td>
+        <td  style="text-align: center;"*ngIf=" item.projectname === getparamname && (access==='admin' || access==='user') && devicesInTopology.includes(item.id)">--</td>
+
+        <!-- <td *ngIf="item.status==='Reserved' && item.projectname === getparamname && (access==='admin' || access==='user') "><button class="btn btn-success"  (click)="clickedreserved(item.id)">{{item.status}}</button></td> -->
+  
+  
+  
+  
+        <!-- <td><button class="btn btn-danger" (click)="deleteId(item.id)">Delete</button></td>
+        <td><a [routerLink]="['/create', item.id]" class="btn btn-primary" >Update</a></td> -->
+  
+        
+      </tr>
+      
+     </tbody> 
+  </table>
+  </div> 
+  
+   
+
+
+
+
+

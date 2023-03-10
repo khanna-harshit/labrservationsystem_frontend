@@ -1,0 +1,88 @@
+
+ 
+      <nav class="navbar navbar-color navbar-expand-lg bg-body-tertiary  bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand"  (click)="clickedHead()" >Lab Reservation Tool</a>
+          <button class="navbar-toggler" type="button"  data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <button class="btn btn-outline-success me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Options</button>
+
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a *ngIf="access==='admin'" class="nav-link active"   aria-current="page" (click)="adduser()">Add User</a>
+            </li>
+            <li class="nav-item">
+              <a *ngIf="access==='admin'" class="nav-link active"  aria-current="page" (click)="adddevice()">Add Device</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" (click)="clickedUser()">User Info</a>
+            </li>
+            
+            
+          </ul>
+          <button class="btn btn-outline-success me-2" type="submit" (click)="clickedCart()">Cart</button>
+
+          <button class="btn btn-outline-danger me-2" type="submit" routerLink="/logout">Logout</button>
+
+        </div>
+       
+      </div>
+  </nav>
+  <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Options</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <nav id="navbar-example3" class="  ">
+        
+          <h6 class="" >Devices</h6>
+          <nav class="nav nav-pills ">
+            <a class="nav-link  ms-3 my-1" style="color:black;"(click)="read()">All Devices</a>
+          </nav>
+
+            <nav class="nav nav-pills ">
+
+            <a class="nav-link  ms-3 my-1"style="color:black;"(click)="reserve()">Reserved Devices</a>
+          </nav>
+
+            <nav class="nav nav-pills ">
+
+            <a class="nav-link  ms-3 my-1" style="color:black;"(click)="unreserve()">Unreserved Devices</a>
+          </nav>
+          
+          <h6 class=" mt-3" >Projects</h6>
+          
+          <nav class="nav nav-pills " *ngFor="let project of projects">
+            <a class="nav-link ms-3 my-1"  style="color:black;" (click)="getProjectInfo(project.projectname, project.id)">{{project.projectname}}</a>
+          </nav>
+        </nav>    </div>
+  </div>
+    
+      <div class="bello container mt-5">
+
+<div class="card container ms-5" style=" margin-top: 100px; ">
+    <div class="card-body">
+      <h5 class="card-title">{{reservedata.rack}} &nbsp; {{reservedata.unit}} &nbsp; {{reservedata.devicename}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Details</h6>
+      <ul class="list-group">
+        <li class="list-group-item">Console IP &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{{reservedata.consoleip}}</li>
+        <li class="list-group-item">Management IP &nbsp;&nbsp;&nbsp;: &nbsp;{{reservedata.managementip}}</li>
+        <li class="list-group-item">Power Cycler IP&nbsp;&nbsp;&nbsp; &nbsp;: &nbsp;{{reservedata.powercycleip}}</li>
+        <li class="list-group-item">Power Cycler Port : &nbsp;{{reservedata.powercycleport}}</li>
+        <li class="list-group-item">Team Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{{reservedata.teamname}}</li>
+        <li class="list-group-item">Project Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;{{reservedata.projectname}}</li>
+        <li class="list-group-item">User &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{reservedata.username}}</li>
+        <li class="list-group-item">Start Time &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{reservedata.time}}</li>
+        <li class="list-group-item">End Time &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{reservedata.endtime}}</li>
+
+
+      </ul>
+      <a  class="mt-3 card-link btn btn-primary" (click)="clickedback()">Back</a>
+    </div>
+  </div>
+  </div>

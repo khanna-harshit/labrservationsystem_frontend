@@ -24,7 +24,7 @@
             
             
           </ul>
-          <button class="btn btn-outline-success me-2" type="submit" (click)="clickedCart()" *ngIf="access==='admin' && 'user'">Your topologies</button>
+          <button class="btn btn-outline-success me-2" type="submit" (click)="clickedCart()" *ngIf="access==='admin' || access==='user'">Your topologies</button>
           <button class="btn btn-outline-success me-2" *ngIf="access==='admin' " type="submit" (click)="clickedTopology()"> Create Topology</button>
 
 

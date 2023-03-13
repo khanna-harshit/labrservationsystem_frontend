@@ -9,7 +9,7 @@
 
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <button class="btn btn-outline-success me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Options</button>
+          <button class="btn btn-outline-success me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Projects</button>
 
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
@@ -34,6 +34,7 @@
        
       </div>
   </nav>
+  
   <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
     <div class="offcanvas-header">
       <h2 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Projects</h2>
@@ -46,10 +47,12 @@
             
             <button class="btn btn-primary m-3"  *ngIf="access==='admin'"  (click)="clickedRegisteredProject()">Register Project</button>  </div>
   </div>
-    
+  <div class="container mt-5 ml-5">
+  <button class="btn btn-warning mt-5 ml-5"  *ngIf="access==='admin'"  (click)="updateDeviceInfo()">Update Device Info</button>  
+</div>
   <div class="container ">
 
-    <div class="card" style="margin-top: 150px; ">
+    <div class="card m-5">
         <div class="card-body">
           <h2 class="card-title">{{reservedata.rack}} &nbsp; {{reservedata.unit}} &nbsp; {{reservedata.devicename}}</h2>
           <h3 class="card-subtitle mb-2 text-muted">Details</h3>
@@ -177,7 +180,7 @@
       <div class="container">
       <button *ngIf="showDeviceInformat" class="btn btn-warning m-2" (click)="updateDevice(showDeviceInformat)">Reserve</button>
 </div>
-      <div class="btn-group container" role="group" aria-label="Basic example "  *ngIf="showTime">
+      <div class="btn-group" role="group" aria-label="Basic example "  *ngIf="showTime">
         <div   *ngFor='let slot of timeInterval' >
           <button *ngIf="slot.extended_slot==='yes'" type="button" class="btn btn-outline-danger m-2" >{{slot.startTime}} - {{slot.endTime}} </button>
           <button *ngIf="slot.extended_slot==='no'" type="button" class="btn btn-outline-success m-2" (click)="clickedTimeSlot( slot.id, slot.startTime, slot.endTime)">{{slot.startTime}} - {{slot.endTime}} </button>
@@ -222,6 +225,7 @@
         
       </div>
     -->
+    <h3 class="m-4 container"><b>Device Information</b></h3>
       <div class="container mt-5 mb-2" *ngIf="extended==='Extended'" > 
         <!-- <h2 class="mb-5">Device Information</h2> -->
         <h4 class="m-4"> For Extended </h4>
@@ -250,7 +254,7 @@
              
 
              <div class="container mt-5 mb-5" *ngIf=" extended!=='Extended'">
-              <h3 class="mb-5">Device Information</h3>
+              <h4 class="m-4"> For {{showCurrentTime}} </h4>
               <table class="table table-bordered container" >
                 <thead style="text-align:center;">
                   <tr>

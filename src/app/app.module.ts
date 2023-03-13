@@ -42,6 +42,7 @@ import { TopologyComponent } from './topology/topology.component';
 import { TopologydetailsComponent } from './topologydetails/topologydetails.component';
 import { ModifytopologyComponent } from './modifytopology/modifytopology.component';
 import { RegisterprojectComponent } from './registerproject/registerproject.component';
+import { UpdatedeviceComponent } from './updatedevice/updatedevice.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +64,8 @@ import { RegisterprojectComponent } from './registerproject/registerproject.comp
     TopologyComponent,
     TopologydetailsComponent,
     ModifytopologyComponent,
-    RegisterprojectComponent
+    RegisterprojectComponent,
+    UpdatedeviceComponent
     ],
   imports: [
     BrowserModule,

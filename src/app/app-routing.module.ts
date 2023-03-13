@@ -20,6 +20,8 @@ import {CartComponent} from './cart/cart.component';
 import {ChnagepasswordComponent} from './chnagepassword/chnagepassword.component';
 import {TopologyComponent} from './topology/topology.component';
 import {TopologydetailsComponent} from './topologydetails/topologydetails.component';
+import {UpdatedeviceComponent} from './updatedevice/updatedevice.component';
+
 
 
 
@@ -50,6 +52,8 @@ const routes: Routes = [
   {path:'topologydetails/:id/:name/:access', component:TopologydetailsComponent, canActivate: [ExpenseGuard]},
   {path:'modifytopology/:id/:name/:access/:projectname', component:ModifytopologyComponent, canActivate: [ExpenseGuard]},
   {path:'registerproject/:id/:access', component:RegisterprojectComponent, canActivate: [ExpenseGuard]},
+  {path:'updatedevice/:id/:userid/:access', component:UpdatedeviceComponent, canActivate: [ExpenseGuard]},
+
 
 
 

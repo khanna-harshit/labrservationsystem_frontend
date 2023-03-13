@@ -316,6 +316,9 @@ deleteFromUserdeviceinfo(name:any):Observable<any>{
 getExtendedTimeInformation(name:any):Observable<any>{
   return this.http.get(`${this.userdeviceinfo}/${name}`)
 }
+updateDeviceFromUpdateDevice(id:any, data:any):Observable<any>{
+  return this.http.put(`${this.apiurl}/${id}`, data);
+}
 selectTimeForTopology(topologyname:any, id:any, dateTime:any):Observable<any>{
   let ids= id;
   let name = topologyname;

@@ -78,59 +78,60 @@ export class CurrentComponent implements OnInit{
   read(){
     let ids=this.getparamid;
     let accesslevel = this.access;
-    this.route.navigate([`/read/${ids}/${accesslevel}`]);
+    window.location.href=`/read/${ids}/${accesslevel}`;
   }
   clickedCurrent(){
     let ids= this.getparamid;
     let accesslevel = this.access;
-    this.route.navigate([`/current/${ids}/${accesslevel}`]);
+    window.location.href=`/current/${ids}/${accesslevel}`;
   }
   clickedTopology(){
     let ids= this.getparamid;
     let accesslevel = this.access;
-    this.route.navigate([`/topology/${ids}/${accesslevel}`])
+    window.location.href=`/topology/${ids}/${accesslevel}`;
     
   }
   clickedHistory(){
     let ids= this.getparamid;
     let accesslevel = this.access;
-    this.route.navigate([`/user/${ids}/${accesslevel}`]);
+    window.location.href=`/user/${ids}/${accesslevel}`;
   }
   reserve(){
     let ids=this.getparamid;
     let accesslevel = this.access;
-    this.route.navigate([`/reserved/${ids}/${accesslevel}`])
+    window.location.href=`/reserved/${ids}/${accesslevel}`
   }
   unreserve(){
     let ids=this.getparamid;
     let accesslevel = this.access;
-    this.route.navigate([`/unreserved/${ids}/${accesslevel}`])
+    window.location.href=`/unreserved/${ids}/${accesslevel}`
   }
   clickedUser(){
     let ids=this.getparamid;
     let accesslevel = this.access;
-    this.route.navigate([`/current/${ids}/${accesslevel}`])
+    window.location.href=`/current/${ids}/${accesslevel}`
   }
   clickedCart(){
     let ids= this.getparamid;
     let accesslevel= this.access;
-    this.route.navigate([`/cart/${ids}/${accesslevel}`]);
+    window.location.href=`/cart/${ids}/${accesslevel}`;
   }
   getProjectInfo(name:any, id:any){
     let names=name;
     let ids= id;
     let accesslevel = this.access;
     let projectid=id;
-    this.route.navigate([`/project/${ids}/${projectid}/${names}/${accesslevel}`])  }
+    window.location.href=`/project/${ids}/${projectid}/${names}/${accesslevel}`
+   }
   clickedHead(){
     let ids=this.getparamid;
     let accesslevel = this.access;
-    this.route.navigate([`/read/${ids}/${accesslevel}`]);
+    window.location.href=`/read/${ids}/${accesslevel}`;
   }
   adduser(){
     let ids=this.getparamid;
     let accesslevel=this.access;
-    this.route.navigate([`/create/${ids}/${accesslevel}`])
+    window.location.href=`/create/${ids}/${accesslevel}`;
   }
   clickedRegisteredProject(){
     let ids= this.getparamid;
@@ -142,7 +143,7 @@ export class CurrentComponent implements OnInit{
   adddevice(){
     let ids= this.getparamid;
     let accesslevel= this.access;
-    this.route.navigate([`/adddevice/${ids}/${accesslevel}`])
+    window.location.href=`/adddevice/${ids}/${accesslevel}`
   }
   clickedUnreserveFromCurrentDevice(id:any){
       this.api.unreserveTheDeviceFromCurrent(id, this.currentTime).subscribe((res)=>{

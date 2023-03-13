@@ -289,7 +289,7 @@ export class TopologydetailsComponent {
   clickedTopology(){
     let ids= this.getparamid;
     let accesslevel = this.access;
-    this.route.navigate([`/topology/${ids}/${accesslevel}`])
+    window.location.href=`/topology/${ids}/${accesslevel}`
     
   }
   updateDeviceForTopology(id:any, nameOfTopology:any){
@@ -331,13 +331,16 @@ export class TopologydetailsComponent {
       }
       console.log(data);
       this.apiservice.updateDeviceForTopology(data, this.getparamid).subscribe((res)=>{
-        console.log(res, "updated userdeviceinfo");
+        window.location.href=`/current/${paramid}/${accesslevel}`
 
+      }, (err)=>{
+        this.errMsg='Selected time slot is not available, Please refresh the page to see the latest available time slot :(';
       })
-      this.route.navigate([`/current/${paramid}/${accesslevel}`])
+      
+      
 
     })
-
+   
 
   }
   clickedRegisteredProject(){
@@ -390,13 +393,16 @@ export class TopologydetailsComponent {
       console.log(data);
       this.apiservice.updateDeviceForTopologyExtended(data, this.getparamid).subscribe((res)=>{
         console.log(res, "updated userdeviceinfo");
+        window.location.reload();
 
 
 
+      }, (err)=>{
+        this.errMsg='Selected time slot is not available, Please refresh the page to see the latest available time slot :(';
       })
       // this.route.navigate([`/current/${paramid}/${accesslevel}`])
 
-      window.location.reload();
+      
 
 
     })
@@ -408,7 +414,7 @@ export class TopologydetailsComponent {
   read(){
     let ids=this.getparamid;
     let accesslevel= this.access;
-    this.route.navigate([`/read/${ids}/${accesslevel}`]);
+    window.location.href=`/read/${ids}/${accesslevel}`;
   }
   reserveAllDevicesInCart(){
     let ids=this.getparamid;
@@ -494,7 +500,7 @@ export class TopologydetailsComponent {
   reserve(){
     let ids=this.getparamid;
     let accesslevel= this.access;
-    this.route.navigate([`/reserved/${ids}/${accesslevel}`]);
+    window.location.href=`/reserved/${ids}/${accesslevel}`;
   }
   clickClose(){
     this.errMsg= '';
@@ -506,38 +512,38 @@ export class TopologydetailsComponent {
 clickedCart(){
   let ids= this.getparamid;
   let accesslevel= this.access;
-  this.route.navigate([`/cart/${ids}/${accesslevel}`]);
+  window.location.href=`/cart/${ids}/${accesslevel}`;
 }
   
   adddevice(){
     let ids= this.getparamid;
     let accesslevel= this.access;
-    this.route.navigate([`/adddevice/${ids}/${accesslevel}`])
+    window.location.href=`/adddevice/${ids}/${accesslevel}`
   }
  
   clickedMoreInformation(id:any){
     let memberId= id;
     let accessLevel = this.access;
     let userId = this.getparamid;
-    this.route.navigate([`/team/${userId}/${accessLevel}/${memberId}`])
+    window.location.href=`/team/${userId}/${accessLevel}/${memberId}`
   }
   unreserve(){
     let ids=this.getparamid;   
     let accesslevel= this.access;
 
-    this.route.navigate([`/unreserved/${ids}/${accesslevel}`])
+    window.location.href=`/unreserved/${ids}/${accesslevel}`
   }
   adduser(){
     let ids=this.getparamid;
     let accesslevel=this.access;
-    this.route.navigate([`/create/${ids}/${accesslevel}`])
+    window.location.href=`/create/${ids}/${accesslevel}`;
   }
   clickedunreserved(id:any){
     let ids=id;
     let accesslevel= this.access;
 
     let userid= this.getparamid;
-    this.route.navigate([`/unreservepage/${ids}/${userid}/${accesslevel}`])
+    window.location.href=`/unreservepage/${ids}/${userid}/${accesslevel}`
     
   }
   clickedreserved(id:any){
@@ -545,26 +551,26 @@ clickedCart(){
     let accesslevel= this.access;
 
     let userid= this.getparamid;
-    this.route.navigate([`/reservepage/${ids}/${userid}/${accesslevel}`])
+    window.location.href=`/reservepage/${ids}/${userid}/${accesslevel}`
   }
   clickedUser(){
     let accesslevel= this.access;
 
     let ids=this.getparamid;
-    this.route.navigate([`/current/${ids}/${accesslevel}`])
+    window.location.href=`/current/${ids}/${accesslevel}`
   }
   getProjectInfo(name:any, id:any){
     let names=name;
     let ids= this.getparamid;
     let accesslevel= this.access;
     let projectid=id;
-    this.route.navigate([`/project/${ids}/${projectid}/${names}/${accesslevel}`])
+    window.location.href=`/project/${ids}/${projectid}/${names}/${accesslevel}`
   }
   clickedHead(){
     let accesslevel= this.access;
 
     let ids=this.getparamid;
-    this.route.navigate([`/read/${ids}/${accesslevel}`]);
+    window.location.href=`/read/${ids}/${accesslevel}`;
   }
   clickChangeButton(){
     window.location.reload();

@@ -282,12 +282,12 @@ if(this.showDeviceInformation!= 'yes'){
     clickedCart(){
       let ids= this.getuserid;
       let accesslevel= this.access;
-      this.route.navigate([`/cart/${ids}/${accesslevel}`]);
+       window.location.href=`/cart/${ids}/${accesslevel}`;
     }
     read(){
       let ids=this.getuserid;
       let accesslevel = this.access;
-      this.route.navigate([`/read/${ids}/${accesslevel}`]);
+       window.location.href=`/read/${ids}/${accesslevel}`;
     }
     clickedRegisteredProject(){
       let ids= this.getparamid;
@@ -309,13 +309,13 @@ if(this.showDeviceInformation!= 'yes'){
       let ids=this.getuserid;
       let accesslevel = this.access;
 
-      this.route.navigate([`/unreserved/${ids}/${accesslevel}`])
+       window.location.href=`/unreserved/${ids}/${accesslevel}`
     }
     clickedUser(){
       let ids=this.getuserid;
       let accesslevel = this.access;
 
-      this.route.navigate([`/current/${ids}/${accesslevel}`])
+       window.location.href=`/current/${ids}/${accesslevel}`
     }
     clickedSelectTime(){
       if(this.dateForm.valid){
@@ -443,6 +443,13 @@ if(this.showDeviceInformation!= 'yes'){
       console.log(this.showDeviceInformat);
 
     }
+    updateDeviceInfo(){
+      let userid= this.getuserid;
+      let deviceid= this.getparamid;
+      let accesslevel = this.access;
+      window.location.href=`/updatedevice/${deviceid}/${userid}/${accesslevel}`
+
+    }
     updateDeviceForExtended(id:any){
       console.log(this.dateForm.value);
       if(this.dateForm.valid){
@@ -479,14 +486,13 @@ if(this.showDeviceInformation!= 'yes'){
         console.log(data);
         this.api.updateDeviceForExtended(data, this.getuserid).subscribe((res)=>{
           console.log(res, "updated userdeviceinfo");
+          window.location.reload();
   
   
   
+        },(err)=>{
+          this.errMsg='Selected time slot is not available, Please refresh the page to see the latest available time slot :(';
         })
-        // this.route.navigate([`/current/${paramid}/${accesslevel}`])
-  
-        window.location.reload();
-  
   
       })
   
@@ -499,28 +505,28 @@ if(this.showDeviceInformation!= 'yes'){
       let ids= id;
       let accesslevel = this.access;
       let projectid=id;
-      this.route.navigate([`/project/${ids}/${projectid}/${names}/${accesslevel}`])
+       window.location.href=`/project/${ids}/${projectid}/${names}/${accesslevel}`
     }
     clickedTopology(){
       let ids= this.getuserid;
       let accesslevel = this.access;
-      this.route.navigate([`/topology/${ids}/${accesslevel}`])
+       window.location.href=`/topology/${ids}/${accesslevel}`
       
     }
     clickedHead(){
       let ids=this.getuserid;
       let accesslevel = this.access;
-      this.route.navigate([`/read/${ids}/${accesslevel}`]);
+       window.location.href=`/read/${ids}/${accesslevel}`;
     }
     adduser(){
       let ids=this.getuserid;
       let accesslevel=this.access;
-      this.route.navigate([`/create/${ids}/${accesslevel}`])
+       window.location.href=`/create/${ids}/${accesslevel}`
     }
     adddevice(){
       let ids= this.getuserid;
       let accesslevel= this.access;
-      this.route.navigate([`/adddevice/${ids}/${accesslevel}`])
+       window.location.href=`/adddevice/${ids}/${accesslevel}`
     }
     clickedTimeSlot(id:any, startTime:any, endTime:any){
       this.timeSlotForTopology= id;
@@ -559,8 +565,10 @@ if(this.showDeviceInformation!= 'yes'){
         // this.api.updateDevice(this.getparamid, data).subscribe((res)=>{
           this.api.updateuserdeviceinfo(this.getparamid, this.getuserid, data).subscribe((res)=>{
        
-            this.route.navigate([`/current/${userid}/${accesslevel}`])
+             window.location.href=`/current/${userid}/${accesslevel}`
             
+          }, (err)=>{
+            this.errMsg='Selected time slot is not available, Please refresh the page to see the latest available time slot :(';
           })
         })
       // });

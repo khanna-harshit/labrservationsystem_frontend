@@ -221,7 +221,7 @@ export class TopologydetailsComponent {
     })
     this.apiservice.getExtendedTimeInformation(this.topologyname).subscribe((res)=>{
       this.extendedTimeInterval = res.data;
-      console.log(this.extendedTimeInterval);
+      console.log(this.extendedTimeInterval, "extended Time Information");
     })
   })
     this.apiservice.selectTimeForTopology(this.topologyname, this.getparamid, this.startTime.substring(0, 11)).subscribe((res)=>{
@@ -233,7 +233,7 @@ export class TopologydetailsComponent {
           if(res.data[i].timeid==this.timeInterval[j].id && res.data[i].status!=='deleted'){
             this.timeInterval[j].topology_slot= 'yes';
             this.showDeviceInfo= "yes";
-            this.timeInterval[i].showHistory='yes';
+            this.timeInterval[j].showHistory='yes';
             this.timeInterval[j].user= res.data[i].name;
         }
         }
@@ -443,14 +443,14 @@ export class TopologydetailsComponent {
         }
         // console.log(this.dateForm.value.startDate, this.dateForm.value.endDate);
         this.apiservice.getExtendedTimeSlotInformation(data).subscribe((res)=>{
-          console.log(res.data, "extended time slot information");
+          console.log(res.data, "extended time slot ");
           this.extendedTimeSlotInformation= res.data;
           for(let i=0;i<res.data.length;i++){
             for(let j=0;j<this.timeInterval.length;j++){
-              if(res.data[i].timeid==this.timeInterval[j].id && res.data[i].status!=='deleted'){
+              if(res.data[i].timeid==this.timeInterval[j].id){
                 this.timeInterval[j].extended_slot= 'yes';
                 this.showDeviceInfo= "yes";
-                this.timeInterval[i].showHistory='yes';
+                this.timeInterval[j].showHistory='yes';
                 this.timeInterval[j].user= res.data[i].name;
             }
             }
@@ -479,7 +479,7 @@ export class TopologydetailsComponent {
             const d2 = new Date(2018, 11, 24, parseInt(this.timeInterval[i].endTime.substring(0,2)), parseInt(this.timeInterval[i].endTime.substring(3,5)));
             
             if(d2<d1){
-              this.isTakenForTopology= false;
+              this.isTakenForTopo= false;
               this.timeInterval[i].extended_slot='invalid';
             }
           }

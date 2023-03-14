@@ -217,6 +217,9 @@ getUserCurrentDevice(id:any, currentTime:any):Observable<any>{
 
   return this.http.get(`${this.userdeviceinfo}/${ids}/${updatedTime}/current/device/status`);
 }
+deleteProject(name:any):Observable<any>{
+  return this.http.delete(`${this.project}/${name}`);
+}
 getUserCurrentDeviceTopology(id:any, currentTime:any):Observable<any>{
   let ids= id;
   let dateTime= currentTime.substring(0, 13)+'-'+currentTime.substring(14,16);
@@ -317,7 +320,7 @@ getExtendedTimeInformation(name:any):Observable<any>{
   return this.http.get(`${this.userdeviceinfo}/${name}`)
 }
 updateDeviceFromUpdateDevice(id:any, data:any):Observable<any>{
-  return this.http.put(`${this.apiurl}/${id}`, data);
+  return this.http.put(`${this.apiurl}/${id}`, data)
 }
 selectTimeForTopology(topologyname:any, id:any, dateTime:any):Observable<any>{
   let ids= id;

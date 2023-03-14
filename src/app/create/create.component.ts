@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as XLSX from 'xlsx';
+// import 'rxjs/add/operator/toPromise';
+
 
 @Component({
   selector: 'app-create',
@@ -96,42 +98,44 @@ uploadFile(){
   else{
   let fileReader = new FileReader();
   fileReader.readAsBinaryString(this.file);
-      fileReader.onload = (e) => {
-          var workBook= XLSX.read(fileReader.result, {type:'binary'});
-          var sheetNames = workBook.SheetNames;
-         
+  fileReader.onload = (e) => {
+    var workBook= XLSX.read(fileReader.result, {type:'binary'});
+    var sheetNames = workBook.SheetNames;
+   
 
-          console.log(XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]]));
+    console.log(XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]]));
 
-          // if(jsonArray[0].length==4){
-          this.api.uploadDataFromExcelUser(XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]])).subscribe((res)=>{
-            console.log("uploaded user information");
-            this.spiner=false;
-            errOrsuccessMsg= true;
+    // if(jsonArray[0].length==4){
+    
+    this.api.uploadDataFromExcelUser(XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]])).subscribe((res)=>{
+      console.log("uploaded user information");
+      this.successMsg="Uploaded !";
+      this.spiner=false;
+      errOrsuccessMsg= true;
 
-            this.successMsg="Uploaded !";
-          }, (err) => {
-            // this.error = err.message;
-            console.log(err.message);
-            errOrsuccessMsg= true;
-            this.errMsg= 'wrong file chosen !';
-            this.spiner=false;
-            // In this block you get your error message
-            // as "Failed to create new user"
-        });
-          
-        setTimeout(() => 
-        {
-          if(!errOrsuccessMsg){
-            this.spiner= false;
-            this.successMsg= "No new device found";
-          }
-        },
-        7000);
-      }   
-        }   
+      
+    }, (err) => {
+      // this.error = err.message;
+      console.log(err.message);
+      errOrsuccessMsg= true;
+      if(err.message=='Http failure response for http://localhost:3000/users/uploadData: 404 Not Found'){
+        this.successMsg='no new  user found';
       }
-        
+      else if(err.message=='Http failure response for http://localhost:3000/users/uploadData: 401 Unauthorized'){
+        this.errMsg='Redundency present in data !';
+      }
+      else{
+      this.errMsg= 'wrong file choosen !';
+      }
+      this.spiner=false;
+      // In this block you get your error message
+      // as "Failed to create new user"
+  })
+    
+  
+}   
+  }
+}  
       
 
 

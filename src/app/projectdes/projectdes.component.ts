@@ -165,6 +165,13 @@ export class ProjectdesComponent implements OnInit {
     let accesslevel=this.access;
     window.location.href=`/unreserved/${ids}/${accesslevel}`
   }
+  deleteProject(name:any){
+    this.apiservice.deleteProject(name).subscribe((res)=>{
+      let ids=this.getparamid;
+      let accesslevel=this.access;
+      window.location.href=`/read/${ids}/${accesslevel}`
+    })
+  }
   adddevice(){
     let ids= this.getparamid;
     let accesslevel= this.access;

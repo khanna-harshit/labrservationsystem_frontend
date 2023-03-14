@@ -198,7 +198,7 @@
                 </tr>
               </thead>
               <tbody *ngFor="let item of timeInterval"> 
-                <tr *ngIf="item.topology_slot==='yes'">
+                <tr *ngIf="item.showHistory==='yes'">
                   <td style="text-align: center;">{{item.startTime}}</td>
                   <td style="text-align: center;">{{item.endTime}}</td>
                   <td style="text-align: center;">{{item.user}}</td>

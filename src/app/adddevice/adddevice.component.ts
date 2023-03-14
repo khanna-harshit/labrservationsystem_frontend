@@ -147,6 +147,7 @@ deviceForm = new FormGroup({
             console.log(XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]]));
   
             // if(jsonArray[0].length==4){
+            
             this.api.uploadDataFromExcel(XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]])).subscribe((res)=>{
               console.log("uploaded user information");
               this.spiner=false;
@@ -156,21 +157,23 @@ deviceForm = new FormGroup({
             }, (err) => {
               // this.error = err.message;
               console.log(err.message);
+              if(err.message=='Http failure response for http://localhost:3000/devices/uploadData: 663 unknown'){
+                this.errMsg= 'wrong file chosen !';
+              }
+              else if(err.message=='Http failure response for http://localhost:3000/devices/uploadData: 404 Not Found'){
+                this.successMsg='no new device present !'
+              }
+              else{
+                this.errMsg= 'redundency present in data!';
+
+              }
               errOrsuccessMsg= true;
-              this.errMsg= 'wrong file chosen !';
               this.spiner=false;
               // In this block you get your error message
               // as "Failed to create new user"
           });
             
-          setTimeout(() => 
-          {
-            if(!errOrsuccessMsg){
-              this.spiner= false;
-              this.successMsg= "No new device found";
-            }
-          },
-          7000);
+          
         }   
           }
         }   

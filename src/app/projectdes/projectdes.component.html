@@ -173,7 +173,9 @@
   </table>
   </div> 
   
-   
+  <div class="container m-5">
+    <button class=" btn btn-danger" *ngIf="access==='admin'" (click)="deleteProject(getparamname)" >Delete project</button>
+  </div>
 
 
 

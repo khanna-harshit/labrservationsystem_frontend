@@ -25,3 +25,20 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Further help
+
+To upload excel file in add device, It should be on this format:
+
+rack	unit	devicename	consoleip	consoleport	managementip	powercycleip	powercycleport	teamname	projectname	status	serialnumber	mac	tg
+
+Redundency should not be present in data coulms - > rack unit and devicename 
+
+
+## Further help
+
+To upload excel file in add user, It should be on this format:
+
+name	password	teamname	accesslevel
+
+Redundency should not be present in data coulm - > name
